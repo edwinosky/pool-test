@@ -1,8 +1,5 @@
 server {
         listen 80;
-        listen [::]:80;
-
-        root /var/www/etfx.masterpro.site/dist;
         index index.html index.htm index.nginx-debian.html;
 
         server_name etfx.masterpro.site;
