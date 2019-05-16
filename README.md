@@ -109,7 +109,7 @@ Register pool account and open wallet for transaction. This process is always re
 
 ### Install Callisto Pool
 
-    $ git clone https://github.com/chainkorea/open-callisto-pool
+    $ git clone https://github.com/edwinosky/open-pool
     $ cd open-callisto-pool
     $ make all
 
