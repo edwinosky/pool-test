@@ -13,3 +13,20 @@ server {
         }
 
 }
+
+
+***///OR////***
+
+server {
+        listen 80;
+        listen [::]:80;
+        root /home/hora/open-pool/www/dist;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name hora.masterpro.site;
+
+        location /api {
+                proxy_pass http://hora.masterpro.site:3033/api;
+        }
+
+}
