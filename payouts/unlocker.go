@@ -11,9 +11,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/math"
 
-	"github.com/chainkorea/open-callisto-pool/rpc"
-	"github.com/chainkorea/open-callisto-pool/storage"
-	"github.com/chainkorea/open-callisto-pool/util"
+	"github.com/edwinosky/open-pool/rpc"
+	"github.com/edwinosky/open-pool/storage"
+	"github.com/edwinosky/open-pool/util"
 )
 
 type UnlockerConfig struct {
