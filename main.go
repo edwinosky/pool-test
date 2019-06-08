@@ -13,10 +13,10 @@ import (
 
 	"github.com/yvasiyarov/gorelic"
 
-	"github.com/edwinosky/open-poo/api"
-	"github.com/edwinosky/open-poo/payouts"
-	"github.com/edwinosky/open-poo/proxy"
-	"github.com/edwinosky/open-poo/storage"
+	"github.com/edwinosky/open-pool/api"
+	"github.com/edwinosky/open-pool/payouts"
+	"github.com/edwinosky/open-pool/proxy"
+	"github.com/edwinosky/open-pool/storage"
 )
 
 var cfg proxy.Config
