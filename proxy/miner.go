@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/tao-foundation/tethashv1"
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/tao-foundation/tethashv1-geth/common"
 )
 
 var hasher = ethash.New()
