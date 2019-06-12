@@ -1,10 +1,10 @@
 package proxy
 
 import (
-	"github.com/edwinosky/open-pool/api"
-	"github.com/edwinosky/open-pool/payouts"
-	"github.com/edwinosky/open-pool/policy"
-	"github.com/edwinosky/open-pool/storage"
+	"github.com/edwinosky/open-test/api"
+	"github.com/edwinosky/open-test/payouts"
+	"github.com/edwinosky/open-test/policy"
+	"github.com/edwinosky/open-test/storage"
 )
 
 type Config struct {
