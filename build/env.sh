@@ -11,16 +11,16 @@ fi
 workspace="$PWD/build/_workspace"
 root="$PWD"
 ethdir="$workspace/src/github.com/edwinosky"
-if [ ! -L "$ethdir/open-pool" ]; then
+if [ ! -L "$ethdir/open-test" ]; then
     mkdir -p "$ethdir"
     cd "$ethdir"
-    ln -s ../../../../../. open-pool
+    ln -s ../../../../../. open-test
     cd "$root"
 fi
 
 cd "$ethdir"
-mv "open-pool" "open-pool.old"
-ln -s ../../../../../. open-pool
+mv "open-test" "open-test.old"
+ln -s ../../../../../. open-test
 cd "$root"
 
 
@@ -31,8 +31,8 @@ GOBIN="$PWD/build/bin"
 export GOPATH GOBIN
 
 # Run the command inside the workspace.
-cd "$ethdir/open-pool"
-PWD="$ethdir/open-pool"
+cd "$ethdir/open-test"
+PWD="$ethdir/open-test"
 
 # Launch the arguments with the configured environment.
 exec "$@"
