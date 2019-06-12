@@ -4,7 +4,7 @@ import (
 	"log"
 	"regexp"
 	"strings"
-	"errors"
+
 
 	"github.com/edwinosky/open-test/rpc"
 	"github.com/edwinosky/open-test/util"
