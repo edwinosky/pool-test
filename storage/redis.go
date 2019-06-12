@@ -10,7 +10,7 @@ import (
 
 	"gopkg.in/redis.v3"
 
-	"github.com/edwinosky/open-pool/util"
+	"github.com/edwinosky/open-test/util"
 )
 
 type Config struct {
