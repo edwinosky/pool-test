@@ -9,11 +9,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/tao-foundation/tethashv1-geth/common/math"
 
-	"github.com/edwinosky/open-pool/rpc"
-	"github.com/edwinosky/open-pool/storage"
-	"github.com/edwinosky/open-pool/util"
+	"github.com/edwinosky/open-test/rpc"
+	"github.com/edwinosky/open-test/storage"
+	"github.com/edwinosky/open-test/util"
 )
 
 type UnlockerConfig struct {
@@ -31,9 +31,9 @@ type UnlockerConfig struct {
 
 const minDepth = 16
 
-var constReward = math.MustParseBig256("25000000000000000000")
+var constReward = math.MustParseBig256("5000000000000000000")
 var uncleReward = new(big.Int).Div(constReward, new(big.Int).SetInt64(32))
-var unclesReward = math.MustParseBig256("0000000000000000000")
+var unclesReward = math.MustParseBig256("3000000000000000000")
 
 // Donate 5% from pool fees to developers
 const donationFee = 0.0
