@@ -55,7 +55,7 @@ func (s *ProxyServer) handleTCPSubmitRPC(cs *Session, id string, params []string
 }
 
 func (s *ProxyServer) handleSubmitRPC(cs *Session, login, id string, params []string) (bool, *ErrorReply) {
-	if !workerPattern.MatchString(id){
+	if !workerPattern.MatchString(id) {
 		id = "0"
 	}
 	if len(params) != 3 {
@@ -69,45 +69,28 @@ func (s *ProxyServer) handleSubmitRPC(cs *Session, login, id string, params []st
 		log.Printf("Malformed PoW result from %s@%s %v", login, cs.ip, params)
 		return false, &ErrorReply{Code: -1, Message: "Malformed PoW result"}
 	}
+	t := s.currentBlockTemplate()
+	exist, validShare := s.processShare(login, id, cs.ip, t, params)
+	ok := s.policy.ApplySharePolicy(cs.ip, !exist && validShare)
 
-	go func(s *ProxyServer, cs *Session, login, id string, params []string) {
-		t := s.currentBlockTemplate()
+	if exist {
+		log.Printf("Duplicate share from %s@%s %v", login, cs.ip, params)
+		return false, &ErrorReply{Code: 22, Message: "Duplicate share"}
+	}
 
-		//MFO: 	This function (s.processShare) will process a share as per hasher.Verify function of github.com/ethereum/ethash
-		//	output of this function is either:
-		//		true,true   	(Exists) which means share already exists and it is validShare
-		//		true,false		(Exists & invalid)which means share already exists and it is invalidShare or it is a block <-- should not ever happen
-		//		false,false		(stale/invalid)which means share is new, and it is not a block, might be a stale share or invalidShare
-		//		false,true		(valid)which means share is new, and it is a block or accepted share
-		//	When this function finishes, the results is already recorded in the db for valid shares or blocks.
-		exist, validShare := s.processShare(login, id, cs.ip, t, params)
-		ok := s.policy.ApplySharePolicy(cs.ip, !exist && validShare)
-
-
-		// if true,true or true,false
-		if exist {
-			log.Printf("Duplicate share from %s@%s %v", login, cs.ip, params)
-			cs.lastErr = errors.New("Duplicate share")
-		}
-
-		// if false, false
-		if !validShare {
-			//MFO: Here we have an invalid share
-			log.Printf("Invalid share from %s@%s", login, cs.ip)
-			// Bad shares limit reached, return error and close
-			if !ok {
-				cs.lastErr = errors.New("Invalid share")
-			}
-		}
-		//MFO: Here we have a valid share and it is already recorded in DB by miner.go
-		// if false, true
-		log.Printf("Valid share from %s@%s", login, cs.ip)
-
+	if !validShare {
+		log.Printf("Invalid share from %s@%s", login, cs.ip)
+		// Bad shares limit reached, return error and close
 		if !ok {
-			cs.lastErr = errors.New("High rate of invalid shares")
+			return false, &ErrorReply{Code: 23, Message: "Invalid share"}
 		}
-	}(s, cs, login, id, params)
+		return false, nil
+	}
+	log.Printf("Valid share from %s@%s", login, cs.ip)
 
+	if !ok {
+		return true, &ErrorReply{Code: -1, Message: "High rate of invalid shares"}
+	}
 	return true, nil
 }
 
