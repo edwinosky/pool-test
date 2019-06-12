@@ -9,7 +9,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/edwinosky/open-pool/util"
+	"github.com/edwinosky/open-test/util"
 )
 
 const (
