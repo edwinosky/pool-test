@@ -10,11 +10,11 @@ import (
 	"time"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/tao-foundation/tethashv1-geth/common/hexutil"
 
-	"github.com/edwinosky/open-pool/rpc"
-	"github.com/edwinosky/open-pool/storage"
-	"github.com/edwinosky/open-pool/util"
+	"github.com/edwinosky/open-test/rpc"
+	"github.com/edwinosky/open-test/storage"
+	"github.com/edwinosky/open-test/util"
 )
 
 const txCheckInterval = 5 * time.Second
